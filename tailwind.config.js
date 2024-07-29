@@ -15,7 +15,8 @@ module.exports = {
       colors: {
         pillcolor: '#f3f4f6',
         bigheading: '#a35af7',
-        footercolor: '#4f46e5'
+        footercolor: '#4f46e5',
+        btncolor:'#934cce5e',
       },
       minHeight: {
         80: '16rem',

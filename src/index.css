@@ -40,7 +40,6 @@ body.dark {
     gap: 2px;
     border-radius: 5px;
   }
-  
   .fork-btn-inner:hover {
     transform: translateY(-2px) !important;
     background-color: #a24dd386 !important;
