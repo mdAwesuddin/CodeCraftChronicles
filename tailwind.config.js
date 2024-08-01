@@ -30,11 +30,15 @@ module.exports = {
         bigheading: '#a35af7',
         footercolor: '#4f46e5',
         btncolor:'#934cce5e',
+        darkmodefootercolor:"#312e81"
       },
       minHeight: {
         80: '16rem',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    
+  ],
 }

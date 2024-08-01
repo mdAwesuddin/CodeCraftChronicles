@@ -5,7 +5,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className=" inset-x-0 bottom-0 px-0 justify-center p-6 flex flex-wrap text-slate-100 sm:justify-between bg-footercolor sm:px-16">
+    <div className=" inset-x-0 bottom-0 px-0 justify-center p-6 flex flex-wrap text-slate-100 sm:justify-between bg-footercolor sm:px-16 dark:bg-darkmodefootercolor">
       {/* mt-10 */}
       <div className="text-base">© 2024 Code Craft Chronicles —@Awesuddin</div>
       <div className="pt-5 flex gap-7 text-xl sm:pt-0">

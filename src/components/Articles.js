@@ -22,7 +22,7 @@ const Articles = ({ articles }) => {
                 </h3>
               </Link>
               <p className="leading-relaxed mb-5 text-gray-800 dark:text-gray-200">
-                {article.content[0].substring(0, 110)}...
+                {article.content[0].content.substring(0, 110)}...
               </p>
               <div className="flex items-center flex-wrap pb-2 border-b-2 border-gray-300 mt-auto w-full justify-between dark:border-indigo-400">
                 <Link

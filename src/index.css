@@ -48,3 +48,12 @@ body.dark {
   .fork-btn-inner::after {
     display: none !important;
   }
+  @media (max-width: 1180px) {
+    .toc {
+      display: none;
+    }
+  }
+  
+  .toc-inner {
+    max-height: calc(100vh - 25vh);
+  }
