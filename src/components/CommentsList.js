@@ -1,19 +1,25 @@
-import React from 'react'
+import React from "react";
 
-const CommentsList = ({comments}) => {
+const CommentsList = ({ comments }) => {
   return (
     <>
-    <h3 className='sm:text-2xl text-xl font-bold my-6 text-gray-900'>
-        Comments:
-    </h3>
-    {comments.map((comment,index)=>(
-        <div key={index}>
-            <h4 className='text-xl font-bold'>{comment.username}</h4>
-            <p className='mt-1 mb-4'>{comment.text}</p>
-        </div>
-    ))}
+      <div className="flex items-center flex-col gap-5 m-5">
+        {comments.map((comment, index) => (
+          <div
+            className="w-11/12 sm:w-8/12 flex-1 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed relative "
+            key={index}
+          >
+            <strong className="text-gray-700 dark:text-gray-200">
+              {comment.name}
+            </strong>
+            <p className="mt-1 mb-4 text-sm text-gray-600 dark:text-gray-300">
+              {comment.comment}
+            </p>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
 
-export default CommentsList
+export default CommentsList;

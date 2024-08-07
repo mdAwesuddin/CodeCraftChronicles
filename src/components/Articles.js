@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { readingTime } from 'reading-time-estimator';
+import { readingTime } from "reading-time-estimator";
 
 const Articles = ({ articles }) => {
   return (
@@ -47,7 +47,7 @@ const Articles = ({ articles }) => {
                   </span>
                 </Link>
                 <span className="text-gray-500 dark:text-gray-400">
-                  {readingTime(article.content.join(' ')).text}
+                  {readingTime(article.content.join(" ")).text}
                 </span>
               </div>
             </div>

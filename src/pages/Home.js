@@ -66,12 +66,12 @@ const Home = () => {
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="w-full rounded-md border border-btncolor bg-white p-3 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                  className="w-11/12 sm:w-full m-3 rounded-md border border-btncolor bg-white p-3 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 />
               </div>
               <button
                 type="submit"
-                className="mt-4 sm:mt-0 flex items-center justify-center rounded-md bg-btncolor p-3 text-base font-medium text-black shadow-sm transition hover:bg-btncolor focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                className="sm:mt-0 m-3 flex items-center justify-center rounded-md bg-btncolor p-2 text-base font-medium text-black shadow-sm transition hover:bg-btncolor focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
               >
                 <span>Sign Up</span>
                 <svg

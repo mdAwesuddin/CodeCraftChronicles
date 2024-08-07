@@ -22,7 +22,9 @@ const articles = [
           name: 'lilly',
           comment: 'good'
         }
-      ]
+      ],
+      References:"News,Techpodcast,Documentation",
+      Author:"Awes",
     },
     {
       topic:"Node",
@@ -51,7 +53,9 @@ const articles = [
           name: 'lilly',
           comment: 'good'
         }
-      ]
+      ],
+      References:"News,Techpodcast,Documentation",
+      Author:"Awes",
     },
     {
       topic:"React",
@@ -84,7 +88,9 @@ const articles = [
           name: 'lilly',
           comment: 'good'
         }
-      ]
+      ],
+      References:"News,Techpodcast,Documentation",
+      Author:"Awes",
     },
     {
       topic:"Node",
@@ -117,7 +123,9 @@ const articles = [
           name: 'lilly',
           comment: 'good'
         }
-      ]
+      ],
+      References:"News,Techpodcast,Documentation",
+      Author:"Awes",
     },
     {
       topic:"React",
@@ -137,7 +145,9 @@ const articles = [
         }
        ],
       created_at: "2024-07-24T17:10:24.878944+00:00",
-      comments:[]
+      comments:[],
+      References:"News,Techpodcast,Documentation",
+      Author:"Awes",
     },
   ];
   export default articles;
