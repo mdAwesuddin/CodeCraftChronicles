@@ -7,10 +7,12 @@ import Article from "./pages/Article";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import Scrollcomp from "./components/Scrollcomp";
 
 function App() {
   return (
     <Router>
+      <Scrollcomp/>
       <Navbar/>
     <div className='max-w-screen-xl mx-auto pt-20 min-h-screen container '>
     <Routes>

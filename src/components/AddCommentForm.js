@@ -3,19 +3,19 @@ import React, { useState } from "react";
 const AddCommentForm = ({ articleName, setArticleInfo }) => {
   const [username, setUsername] = useState("");
   const [commentText, setCommentText] = useState("");
-  const addComments = async () => {
-    const result = await fetch(`/api/articles/${articleName}/add-comments`, {
-      method: "post",
-      body: JSON.stringify({ username, text: commentText }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const body = await result.json();
-    setArticleInfo(body);
-    setUsername("");
-    setCommentText("");
-  };
+  // const addComments = async () => {
+  //   const result = await fetch(`/api/articles/${articleName}/add-comments`, {
+  //     method: "post",
+  //     body: JSON.stringify({ username, text: commentText }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   const body = await result.json();
+  //   setArticleInfo(body);
+  //   setUsername("");
+  //   setCommentText("");
+  // };
   return (
     <div className="flex justify-center">
       <form className=" rounded px-8 pt-6 pb-8 m-5 w-full sm:w-8/12">
@@ -28,6 +28,7 @@ const AddCommentForm = ({ articleName, setArticleInfo }) => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-ouline"
+          required
         />
         <label className="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
           Comment:
@@ -38,9 +39,10 @@ const AddCommentForm = ({ articleName, setArticleInfo }) => {
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-ouline"
+          required
         />
         <button
-          onClick={() => addComments()}
+          onClick={console.log("clicked")}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Post

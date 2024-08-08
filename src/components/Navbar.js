@@ -49,6 +49,7 @@ const Navbar = () => {
             <Link
               to="/"
               className="block px-6 py-2 md:px-4 md:py-0 hover:text-indigo-600 text-gray-800 dark:text-gray-50"
+              onClick={() => isOpen? setIsOpen(!isOpen):''}
             >
               Home
             </Link>
@@ -57,6 +58,7 @@ const Navbar = () => {
             <Link
               to="/about"
               className="block px-6 py-2 md:px-4 md:py-0 hover:text-indigo-600 text-gray-800 dark:text-gray-50"
+              onClick={() => isOpen? setIsOpen(!isOpen):''}
             >
               About
             </Link>
@@ -65,6 +67,7 @@ const Navbar = () => {
             <Link
               to="/articles-list"
               className="block px-6 py-2 md:px-4 md:py-0 hover:text-indigo-600 text-gray-800 dark:text-gray-50"
+              onClick={() => isOpen? setIsOpen(!isOpen):''}
             >
               Articles
             </Link>
@@ -73,6 +76,7 @@ const Navbar = () => {
             <Link
               to="/cod"
               className="block px-6 py-2 md:px-4 md:py-0 hover:text-indigo-600 text-gray-800 dark:text-gray-50"
+              onClick={() => isOpen? setIsOpen(!isOpen):''}
             >
               COD
             </Link>
