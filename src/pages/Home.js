@@ -1,19 +1,11 @@
 import React, { useEffect } from "react";
-import articleContent from "./article-content";
 import Articles from "../components/Articles";
 import AnimatedShinyText from "../components/magicui/animated-shiny-text";
 import BlurIn from "../components/magicui/BlurIn";
-import { getblogs } from "../db/getBlogs";
-import useFetch from "../hooks/use-fetch";
+import { BlogsState } from "../Context";
 
 const Home = () => {
-  const { loading, error, data: blogs, fn: fnBlogs } = useFetch(getblogs);
-
-  console.log(blogs, "dataa");
-
-  useEffect(() => {
-    fnBlogs();
-  }, []);
+  const { blogs:articleContent, loading } = BlogsState();
   
   return (
     <>
@@ -55,7 +47,7 @@ const Home = () => {
         <hr />
         <div className="container py-4 mx-auto">
           <div className="sm:flex flex-warp m-4">
-            <Articles articles={articleContent} />
+            <Articles articles={articleContent} loader={loading} />
           </div>
         </div>
         <div className="pb-8 md:p-12 lg:px-16 lg:py-15">

@@ -1,12 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { readingTime } from "reading-time-estimator";
+import { ThreeDots } from "react-loader-spinner";
 
-const Articles = ({ articles }) => {
+const Articles = ({ articles, loader }) => {
+  if (loader) {
+    return (
+      <div className="flex justify-center items-center h-full w-full">
+        <ThreeDots
+          visible={true}
+          height="80"
+          width="80"
+          color="#a35af7"
+          radius="9"
+          ariaLabel="three-dots-loading"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-      {articles.map((article, index) => (
-        <div key={index} className="p-4 cursor-pointer group ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles?.map((article, index) => (
+        <div key={index} className="p-4 cursor-pointer group">
           <div className="h-full flex flex-col overflow-hidden">
             <Link to={`/article/${article.name}`}>
               <div className="ml-4 mt-3 w-fit rounded-xl bg-pillcolor dark:bg-indigo-900 text-indigo-700 dark:text-gray-200">
@@ -20,10 +36,10 @@ const Articles = ({ articles }) => {
                 <h3 className="text-2xl font-medium text-gray-700 mb-3 dark:text-gray-100 group-hover:text-indigo-800 dark:group-hover:text-indigo-400">
                   {article.title}
                 </h3>
+                <p className="leading-relaxed mb-5 text-gray-800 dark:text-gray-200">
+                  {article.content[0].content.substring(0, 110)}...
+                </p>
               </Link>
-              <p className="leading-relaxed mb-5 text-gray-800 dark:text-gray-200">
-                {article.content[0].content.substring(0, 110)}...
-              </p>
               <div className="flex items-center flex-wrap pb-2 border-b-2 border-gray-300 mt-auto w-full justify-between dark:border-indigo-400">
                 <Link
                   className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"

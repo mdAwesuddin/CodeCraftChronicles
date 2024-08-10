@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import articleContent from "./article-content";
+// import articleContent from "./article-content";
 
 //Componenets
 import Articles from "../components/Articles";
@@ -10,12 +10,15 @@ import SideNav from "../components/SideNav";
 import { BsThreeDots } from "react-icons/bs";
 //pages
 import NotFound from "./NotFound";
+import { BlogsState } from "../Context";
 
 const Article = () => {
   const { name } = useParams();
-  const article = articleContent.find((article) => article.name === name);
+  const { blogs:articleContent, loading } = BlogsState();
+  const article = articleContent?.find((article) => article.name === name);
   const [articleInfo, setArticleInfo] = useState({ comments: [] });
 
+  console.log(articleContent,'ar54')
   const headingRefs = useRef({});
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Article = () => {
         <div className="rounded-lg shadow-lg bg-white dark:bg-gray-900 pb-8 w-full sm:w-7/12">
           <img
             className="object-cover w-full h-72"
-            src={article.thumbnail}
+            src={article?.thumbnail}
             alt="Article Image"
           />
 
@@ -51,28 +54,28 @@ const Article = () => {
                   className="inline-block px-3 ml-3 py-1 mb-4 text-xs font-semibold tracking-wider text-gray-50 uppercase rounded-full bg-indigo-500 dark:bg-indigo-600"
                 >
                   {/* {tag} */}
-                  {article.topic}
+                  {article?.topic}
                 </p>
                 {/* ))} */}
               </div>
               <a className="block mt-2 text-2xl sm:text-4xl font-semibold text-gray-800 dark:text-gray-100 text-center">
-                {article.title}
+                {article?.title}
               </a>
 
               <p className="text-5xl pt-2">
                 <BsThreeDots />
               </p>
-              {article.content.map((ar) => (
+              {article?.content.map((ar) => (
                 <>
                   <div className="flex justify-start items-start w-full ps-2 sm:ps-6 mt-4">
                     <a
-                      id={ar.Title}
+                      id={ar?.Title}
                       className="mt-2 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-100"
                     >
-                      {ar.Title}
+                      {ar?.Title}
                     </a>
                   </div>
-                  {ar.image ? (
+                  {ar?.image ? (
                     <div className="m-5 p-2  w-full sm:w-11/12">
                       <img
                         className="object-cover w-full h-72"
@@ -86,7 +89,7 @@ const Article = () => {
 
                   <article className="prose max-w-xs sm:max-w-sm md:max-w-prose lg:prose-lg py-4 dark:prose-dark ">
                     {/* <MDXRemote {...content} /> */}
-                    <p className="dark:text-gray-100"> {ar.content}</p>
+                    <p className="dark:text-gray-100"> {ar?.content}</p>
                   </article>
                 </>
               ))}
@@ -95,7 +98,7 @@ const Article = () => {
                   References:
                 </strong>
                 <p className="mx-2 text-gray-700 dark:text-gray-100">
-                  {article.References.split(",").map((ref, index) => (
+                  {article?.References?.split(",").map((ref, index) => (
                     <li key={index}>{ref.trim()}</li>
                   ))}
                 </p>
@@ -107,7 +110,7 @@ const Article = () => {
                   </p>
                   <p className="text-2xl pb-2">Thanks for reading!!!</p>
                   <p className="mx-2 font-semibold text-gray-700 dark:text-gray-100">
-                    {article.Author}
+                    {article?.Author}
                   </p>
                   <p className="text-sm font-medium leading-4 text-gray-600 dark:text-gray-200">
                     Author
@@ -118,11 +121,11 @@ const Article = () => {
           </div>
         </div>
         <div className="toc ml-4 w-1/4 max-w-sm">
-          <SideNav headings={article.content} headingRefs={headingRefs} />
+          <SideNav headings={article?.content} headingRefs={headingRefs} />
         </div>
       </div>
       <AddCommentForm />
-      <CommentsList comments={article.comments} />
+      <CommentsList/>
     </>
   );
 };

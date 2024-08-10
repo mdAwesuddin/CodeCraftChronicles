@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from "react";
-import articleContent from "./article-content";
 import Articles from "../components/Articles";
 import { DropdownMenu } from "@pikas-ui/dropdown-menu";
 import { FaFilter } from "react-icons/fa6";
+import { BlogsState } from "../Context";
+// import articleContent from "./article-content";
 
 const ArticlesList = () => {
-  const [sortedArticles, setSortedArticles] = useState(articleContent);
+  const { blogs: articleContent = [], loading, fetchBlogs } = BlogsState();
+  const [sortedArticles, setSortedArticles] = useState([]);
   const [sortOption, setSortOption] = useState('Newest First');
 
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  useEffect(() => {
+    if (articleContent && Array.isArray(articleContent)) {
+      handleSortChange(sortOption);
+    } else {
+      console.error("articleContent is not an array or is undefined");
+    }
+  }, [articleContent, sortOption]);
+
   const handleSortChange = (label) => {
+    if (!Array.isArray(articleContent)) {
+      console.error("articleContent is not an array");
+      return;
+    }
+
     let sorted = [];
     if (label === "Newest First") {
       sorted = [...articleContent].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -23,20 +42,14 @@ const ArticlesList = () => {
     setSortOption(label);
   };
 
-  useEffect(() => {
-    handleSortChange(sortOption);
-  }, [sortOption]);
-
-  const Filterbtn = () => {
-    return (
-      <button className="bg-indigo-500 px-3 py-1 font-semibold text-white rounded dark:bg-indigo-600">
-        <div className="flex justify-center items-center gap-2">
-          <FaFilter />
-          <span className="hidden sm:block">Sort by</span>
-        </div>
-      </button>
-    );
-  };
+  const Filterbtn = () => (
+    <button className="bg-indigo-500 px-3 py-1 font-semibold text-white rounded dark:bg-indigo-600">
+      <div className="flex justify-center items-center gap-2">
+        <FaFilter />
+        <span className="hidden sm:block">Sort by</span>
+      </div>
+    </button>
+  );
 
   return (
     <>

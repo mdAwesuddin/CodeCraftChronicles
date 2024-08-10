@@ -8,9 +8,11 @@ import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import Scrollcomp from "./components/Scrollcomp";
+import BlogsProvider from "./Context";
 
 function App() {
   return (
+    <BlogsProvider>
     <Router>
       <Scrollcomp/>
       <Navbar/>
@@ -25,6 +27,7 @@ function App() {
     </div>
     <Footer/>
     </Router>
+    </BlogsProvider>
   );
 }
 

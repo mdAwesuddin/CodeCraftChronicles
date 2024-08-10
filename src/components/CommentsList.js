@@ -4,7 +4,7 @@ const CommentsList = ({ comments }) => {
   return (
     <>
       <div className="flex items-center flex-col gap-5 m-5">
-        {comments.map((comment, index) => (
+        {comments?.map((comment, index) => (
           <div
             className="w-11/12 sm:w-8/12 flex-1 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed relative "
             key={index}
