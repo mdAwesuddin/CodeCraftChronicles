@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import articleContent from "./article-content";
 import Articles from "../components/Articles";
 import AnimatedShinyText from "../components/magicui/animated-shiny-text";
 import BlurIn from "../components/magicui/BlurIn";
+import { getblogs } from "../db/getBlogs";
+import useFetch from "../hooks/use-fetch";
 
 const Home = () => {
+  const { loading, error, data: blogs, fn: fnBlogs } = useFetch(getblogs);
+
+  console.log(blogs, "dataa");
+
+  useEffect(() => {
+    fnBlogs();
+  }, []);
+  
   return (
     <>
       <div className="mb-16">
@@ -19,18 +29,18 @@ const Home = () => {
           <span>Code Craft Chronicles</span>
         </AnimatedShinyText>
         <div className="flex flex-row justify-center items-center gap-3">
-        <BlurIn
-        word="Journey"
-        className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
-        />
-         <BlurIn
-         word="Through"
-         className="sm:text-5xl text-3xl font-montserrat text-purple-500"
-         />
-         <BlurIn
-        word="Code"
-        className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
-        />
+          <BlurIn
+            word="Journey"
+            className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
+          />
+          <BlurIn
+            word="Through"
+            className="sm:text-5xl text-3xl font-montserrat text-purple-500"
+          />
+          <BlurIn
+            word="Code"
+            className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
+          />
         </div>
         {/* <h1 className="sm:text-5xl text-3xl font-montserrat my-5 text-gray-900 text-center dark:text-gray-50">
           Journey{" "}
