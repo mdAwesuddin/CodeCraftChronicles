@@ -8,7 +8,7 @@ import { BlogsState } from "../Context";
 const ArticlesList = () => {
   const { blogs: articleContent = [], loading, fetchBlogs } = BlogsState();
   const [sortedArticles, setSortedArticles] = useState([]);
-  const [sortOption, setSortOption] = useState('Newest First');
+  const [sortOption, setSortOption] = useState('Popular 🔥');
 
   useEffect(() => {
     fetchBlogs();
@@ -34,7 +34,7 @@ const ArticlesList = () => {
     } else if (label === "Oldest First") {
       sorted = [...articleContent].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
     } else if (label === "Popular 🔥") {
-      sorted = [...articleContent].sort((a, b) => b.comments.length - a.comments.length);
+      sorted = [...articleContent].sort((a, b) => b.comment_count - a.comment_count);
     } else if (label === "Random") {
       sorted = [...articleContent].sort(() => Math.random() - 0.5);
     }

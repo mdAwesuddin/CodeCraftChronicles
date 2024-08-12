@@ -9,27 +9,21 @@ import AddCommentForm from "../components/AddCommentForm";
 import SideNav from "../components/SideNav";
 import { BsThreeDots } from "react-icons/bs";
 //pages
-import NotFound from "./NotFound";
 import { BlogsState } from "../Context";
+import { getcomments } from "../db/getComments";
+import useFetch from "../hooks/use-fetch";
 
 const Article = () => {
   const { name } = useParams();
   const { blogs:articleContent, loading } = BlogsState();
-  const article = articleContent?.find((article) => article.name === name);
+  const article = articleContent?.find((article) => article.id == name);
   const [articleInfo, setArticleInfo] = useState({ comments: [] });
-
-  console.log(articleContent,'ar54')
   const headingRefs = useRef({});
+  // const { data: comments, loading:commentsloading, fn: fetchComments } = useFetch(getcomments(name));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`/api/articles/${name}`);
-      const body = await result.json();
-      console.log(body);
-      setArticleInfo(body);
-    };
-    fetchData();
-  }, [name]);
+  // useEffect(() => {
+  //   fetchComments();
+  // }, []);
 
   // if (!article) return <NotFound />;
   // const otherArticles = articleContent.filter(
@@ -65,7 +59,7 @@ const Article = () => {
               <p className="text-5xl pt-2">
                 <BsThreeDots />
               </p>
-              {article?.content.map((ar) => (
+              {article?.content?.map((ar) => (
                 <>
                   <div className="flex justify-start items-start w-full ps-2 sm:ps-6 mt-4">
                     <a
@@ -98,7 +92,7 @@ const Article = () => {
                   References:
                 </strong>
                 <p className="mx-2 text-gray-700 dark:text-gray-100">
-                  {article?.References?.split(",").map((ref, index) => (
+                  {article?.references?.split(",").map((ref, index) => (
                     <li key={index}>{ref.trim()}</li>
                   ))}
                 </p>
@@ -125,7 +119,7 @@ const Article = () => {
         </div>
       </div>
       <AddCommentForm />
-      <CommentsList/>
+      <CommentsList id={name}/>
     </>
   );
 };

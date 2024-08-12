@@ -1,6 +1,16 @@
-import React from "react";
+import React,{useEffect} from "react";
+import useFetch from "../hooks/use-fetch";
+import { getcomments } from "../db/getComments";
 
-const CommentsList = ({ comments }) => {
+const CommentsList = ({ id }) => {
+  console.log(id,'skjs');
+  
+  const { data: comments, loading:commentsloading, fn: fetchComments } = useFetch(getcomments(id));
+ console.log(comments,'co')
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
   return (
     <>
       <div className="flex items-center flex-col gap-5 m-5">

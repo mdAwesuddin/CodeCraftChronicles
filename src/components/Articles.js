@@ -24,7 +24,7 @@ const Articles = ({ articles, loader }) => {
       {articles?.map((article, index) => (
         <div key={index} className="p-4 cursor-pointer group">
           <div className="h-full flex flex-col overflow-hidden">
-            <Link to={`/article/${article.name}`}>
+            <Link to={`/article/${article.id}`}>
               <div className="ml-4 mt-3 w-fit rounded-xl bg-pillcolor dark:bg-indigo-900 text-indigo-700 dark:text-gray-200">
                 <p className="p-1 px-2 font-medium tracking-widest">
                   {article.topic}
@@ -32,7 +32,7 @@ const Articles = ({ articles, loader }) => {
               </div>
             </Link>
             <div className="p-5 flex flex-col flex-grow">
-              <Link to={`/article/${article.name}`}>
+              <Link to={`/article/${article.id}`}>
                 <h3 className="text-2xl font-medium text-gray-700 mb-3 dark:text-gray-100 group-hover:text-indigo-800 dark:group-hover:text-indigo-400">
                   {article.title}
                 </h3>
@@ -43,7 +43,7 @@ const Articles = ({ articles, loader }) => {
               <div className="flex items-center flex-wrap pb-2 border-b-2 border-gray-300 mt-auto w-full justify-between dark:border-indigo-400">
                 <Link
                   className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"
-                  to={`/article/${article.name}`}
+                  to={`/article/${article.id}`}
                 >
                   Learn more
                   <span className="pl-1">
