@@ -19,11 +19,12 @@ const Article = () => {
   const article = articleContent?.find((article) => article.id == name);
   const [articleInfo, setArticleInfo] = useState({ comments: [] });
   const headingRefs = useRef({});
-  // const { data: comments, loading:commentsloading, fn: fetchComments } = useFetch(getcomments(name));
 
-  // useEffect(() => {
-  //   fetchComments();
-  // }, []);
+  const { data: comments, loading:commentsloading, fn: fetchComments } = useFetch(getcomments, name);
+  
+  useEffect(() => {
+    fetchComments();
+  }, []);
 
   // if (!article) return <NotFound />;
   // const otherArticles = articleContent.filter(
@@ -119,7 +120,7 @@ const Article = () => {
         </div>
       </div>
       <AddCommentForm />
-      <CommentsList id={name}/>
+      <CommentsList comments={comments}/>
     </>
   );
 };
