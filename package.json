@@ -23,6 +23,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "react-toastify": "^10.0.5",
     "react-toggle-dark-mode": "^1.1.1",
     "reading-time": "^1.5.0",
     "reading-time-estimator": "^1.11.0",

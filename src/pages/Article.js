@@ -12,19 +12,40 @@ import { BsThreeDots } from "react-icons/bs";
 import { BlogsState } from "../Context";
 import { getcomments } from "../db/getComments";
 import useFetch from "../hooks/use-fetch";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Article = () => {
   const { name } = useParams();
-  const { blogs:articleContent, loading } = BlogsState();
+  const { blogs: articleContent, loading } = BlogsState();
   const article = articleContent?.find((article) => article.id == name);
-  const [articleInfo, setArticleInfo] = useState({ comments: [] });
+  const [refresh, setRefresh] = useState(false);
   const headingRefs = useRef({});
 
-  const { data: comments, loading:commentsloading, fn: fetchComments } = useFetch(getcomments, name);
-  
+  const {
+    data: comments,
+    loading: commentsloading,
+    fn: fetchComments,
+  } = useFetch(getcomments, name);
+
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [refresh]);
+
+  const handlePostComment = () => {
+    toast('Comment Added :)', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // transition: Bounce,
+      });
+    setRefresh(prev => !prev);
+  };
 
   // if (!article) return <NotFound />;
   // const otherArticles = articleContent.filter(
@@ -119,8 +140,9 @@ const Article = () => {
           <SideNav headings={article?.content} headingRefs={headingRefs} />
         </div>
       </div>
-      <AddCommentForm />
-      <CommentsList comments={comments}/>
+      <AddCommentForm blogid={name} onPostComment={handlePostComment}/>
+      <CommentsList comments={comments} />
+      <ToastContainer />
     </>
   );
 };
