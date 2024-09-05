@@ -19,7 +19,6 @@ const Article = () => {
   const { name } = useParams();
   const { blogs: articleContent, loading } = BlogsState();
   const article = articleContent?.find((article) => article.id == name);
-  const [refresh, setRefresh] = useState(false);
   const headingRefs = useRef({});
 
   const {
@@ -30,7 +29,7 @@ const Article = () => {
 
   useEffect(() => {
     fetchComments();
-  }, [refresh]);
+  }, []);
 
   const handlePostComment = () => {
     toast('Comment Added :)', {
@@ -42,9 +41,8 @@ const Article = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      // transition: Bounce,
       });
-    setRefresh(prev => !prev);
+    fetchComments();
   };
 
   // if (!article) return <NotFound />;
