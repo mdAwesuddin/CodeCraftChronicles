@@ -130,14 +130,14 @@ const Navbar = () => {
           {/* <button className="login-btn">
             <span>Login</span>
           </button> */}
-          <button
-            href="https://github.com/mdAwesuddin/Portfolio"
+          <a
+            href="https://github.com/mdAwesuddin/CodeCraftChronicles"
             target="_blank"
             className="fork-btn-inner"
           >
             <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
             <AiFillStar style={{ fontSize: "1.1em" }} />
-          </button>
+          </a>
         </div>
       </div>
     </nav>
