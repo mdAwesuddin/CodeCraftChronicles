@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import Scrollcomp from "./components/Scrollcomp";
 import BlogsProvider from "./Context";
+import Beyondwork from "./pages/Beyondwork";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
        <Route path='/about' element={<About />}  />
        <Route path='/articles-list' element={<ArticlesList />}  />
        <Route path='/article/:name' element={<Article />}  />
+       <Route path='/😊' element={<Beyondwork />}  />
        <Route path="*" element={<NotFound/>}/>
     </Routes>
     </div>

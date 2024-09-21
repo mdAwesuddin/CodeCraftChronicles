@@ -3,45 +3,55 @@ import Articles from "../components/Articles";
 import AnimatedShinyText from "../components/magicui/animated-shiny-text";
 import BlurIn from "../components/magicui/BlurIn";
 import { BlogsState } from "../Context";
+import { ThreeDots } from "react-loader-spinner";
 
 const Home = () => {
-  const { blogs:articleContent, loading } = BlogsState();
-  
+  const { blogs: articleContent, loading } = BlogsState();
+  const { userdetails: details, detailsloader} = BlogsState();
+
+  console.log(details, 'det'); 
+
+  if (detailsloader) {
+    return (
+      <div className="flex justify-center items-center h-full w-full">
+        <ThreeDots
+          visible={true}
+          height="80"
+          width="80"
+          color="#a35af7"
+          radius="9"
+          ariaLabel="three-dots-loading"
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="mb-16">
-        {/* <h1 className="sm:text-3xl text-2xl font-bold font-playwrite my-5 text-gray-900 text-center dark:text-gray-300">
-          Code Craft Chronicles
-        </h1> */}
-        {/* <BlurIn
-          word="Blur In"
-          className="text-4xl font-bold text-black dark:text-white"
-        /> */}
-        <AnimatedShinyText className="flex sm:text-3xl text-2xl items-center font-playwrite font-bold justify-center px-4 py-1 my-5 transition text-center ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-          <span>Code Craft Chronicles</span>
-        </AnimatedShinyText>
+        {details && details.length > 0 ? (
+          <AnimatedShinyText className="flex sm:text-3xl text-2xl items-center font-playwrite font-bold justify-center px-4 py-1 my-5 transition text-center ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+            <span>{details[0]?.blog_name}</span>
+          </AnimatedShinyText>
+        ) : (
+          <p className="text-center"></p> 
+        )}
         <div className="flex flex-row justify-center items-center gap-3">
           <BlurIn
-            word="Journey"
+            word={details && details[0]?.tagline1 ? details[0].tagline1.split(' ')[0] : "tagline"}
             className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
           />
           <BlurIn
-            word="Through"
+            word={details && details[0]?.tagline1 ? details[0].tagline1.split(' ')[1] : "tagline"}
             className="sm:text-5xl text-3xl font-montserrat text-purple-500"
           />
           <BlurIn
-            word="Code"
+            word={details && details[0]?.tagline1 ? details[0].tagline1.split(' ')[2] : "tagline"}
             className="sm:text-5xl text-3xl font-montserrat text-gray-900 text-center dark:text-gray-50"
           />
         </div>
-        {/* <h1 className="sm:text-5xl text-3xl font-montserrat my-5 text-gray-900 text-center dark:text-gray-50">
-          Journey{" "}
-          <span className="text-bigheading leading-12 text-gradient-to-r from-blue-400 to-purple-500">
-            Through
-          </span>{" "}
-          Code
-        </h1> */}
       </div>
+
       <div>
         <h5 className="font-rubik p-2">Latest Blogs</h5>
         <hr />
@@ -50,6 +60,7 @@ const Home = () => {
             <Articles articles={articleContent} loader={loading} />
           </div>
         </div>
+
         <div className="pb-8 md:p-12 lg:px-16 lg:py-15">
           <div className="mx-auto max-w-lg text-center">
             <h2 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white">
@@ -59,6 +70,7 @@ const Home = () => {
               To Receive Daily Blog Updates
             </p>
           </div>
+
           <div className="sm:mx-auto sm:mt-8 sm:max-w-xl sm:flex sm:flex-col sm:justify-center sm:items-center">
             <form action="#" className="sm:flex sm:gap-4 w-full">
               <div className="sm:flex-1">

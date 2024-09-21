@@ -3,12 +3,12 @@ import Articles from "../components/Articles";
 import { DropdownMenu } from "@pikas-ui/dropdown-menu";
 import { FaFilter } from "react-icons/fa6";
 import { BlogsState } from "../Context";
-// import articleContent from "./article-content";
 
 const ArticlesList = () => {
   const { blogs: articleContent = [], loading, fetchBlogs } = BlogsState();
   const [sortedArticles, setSortedArticles] = useState([]);
-  const [sortOption, setSortOption] = useState('Popular 🔥');
+  const [sortOption, setSortOption] = useState("Popular 🔥");
+  const { userdetails: details } = BlogsState();
 
   useEffect(() => {
     fetchBlogs();
@@ -30,11 +30,17 @@ const ArticlesList = () => {
 
     let sorted = [];
     if (label === "Newest First") {
-      sorted = [...articleContent].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      sorted = [...articleContent].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
     } else if (label === "Oldest First") {
-      sorted = [...articleContent].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      sorted = [...articleContent].sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
     } else if (label === "Popular 🔥") {
-      sorted = [...articleContent].sort((a, b) => b.comment_count - a.comment_count);
+      sorted = [...articleContent].sort(
+        (a, b) => b.comment_count - a.comment_count
+      );
     } else if (label === "Random") {
       sorted = [...articleContent].sort(() => Math.random() - 0.5);
     }
@@ -96,7 +102,20 @@ const ArticlesList = () => {
         </div>
         <div>
           <h1 className="sm:text-3xl text-2xl pb-3 font-bold font-playwrite text-gray-900 text-center dark:text-gray-300">
-            Unleash the <span className="text-bigheading leading-12 text-gradient-to-r from-blue-400 to-purple-500">code </span> journey
+            {details && details[0]?.tagline2
+              ? details[0].tagline2.split(" ")[0]
+              : ""}{" "}
+            {details && details[0]?.tagline2
+              ? details[0].tagline2.split(" ")[1]
+              : ""}{" "}
+            <span className="text-bigheading leading-12 text-gradient-to-r from-blue-400 to-purple-500">
+              {details && details[0]?.tagline2
+                ? details[0].tagline2.split(" ")[2]
+                : ""}{" "}
+            </span>{" "}
+            {details && details[0]?.tagline2
+              ? details[0].tagline2.split(" ")[3]
+              : ""}
           </h1>
         </div>
         <div />
