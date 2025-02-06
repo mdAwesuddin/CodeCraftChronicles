@@ -12,7 +12,7 @@ const Footer = () => {
       {/* mt-10 */}
       {details && details.length > 0 ? (
         <div className="text-base">
-          © 2024 Code Craft Chronicles —@{details[0]?.name}
+          © 2025 Code Craft Chronicles —@{details[0]?.name}
         </div>
       ) : (
         <p className="text-center"></p>
