@@ -20,6 +20,7 @@ const Article = () => {
   const { blogs: articleContent, loading } = BlogsState();
   const article = articleContent?.find((article) => article.id == name);
   const headingRefs = useRef({});
+  const [summaryOpen, setSummaryOpen] = useState(false);
 
   const {
     data: comments,
@@ -44,7 +45,13 @@ const Article = () => {
       });
     fetchComments();
   };
-
+  const keyPoints = [
+    "Performance boost of up to 40% with the new Hermes JavaScript engine",
+    "Improved compatibility with web React through shared component APIs",
+    "Enhanced rendering capabilities with the new Fabric renderer",
+    "Faster build times using ESBuild and TypeScript enhancements",
+    "Simplified upgrade path compared to previous major versions"
+  ];
   // if (!article) return <NotFound />;
   // const otherArticles = articleContent.filter(
   //   (article) => article.name !== name
@@ -134,6 +141,46 @@ const Article = () => {
             </div>
           </div>
         </div>
+
+        <div className={`fixed top-0 right-0 w-96 h-full bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 z-50 ${summaryOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        {/* Tab */}
+        <div 
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full w-10 h-32 bg-indigo-500 rounded-l-lg flex items-center justify-center cursor-pointer"
+          onClick={() => setSummaryOpen(!summaryOpen)}
+        >
+          <span className="text-white font-bold uppercase transform -rotate-90 tracking-wider">Summary</span>
+        </div>
+        
+        {/* Header */}
+        <div className="bg-indigo-500 dark:bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+          <h2 className="text-lg font-semibold">Article Summary</h2>
+          <button 
+            className="text-2xl font-bold hover:text-gray-200"
+            onClick={() => setSummaryOpen(false)}
+          >
+            ×
+          </button>
+        </div>
+        
+        {/* Summary Text */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <p className="text-gray-800 dark:text-gray-200">hello</p>
+        </div>
+        
+        {/* Key Points */}
+        <div className="p-4">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Key Points:</h3>
+          <ul className="space-y-3">
+            {keyPoints.map((point, index) => (
+              <li key={index} className="flex items-start">
+                <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 mr-2 flex-shrink-0"></div>
+                <span className="text-gray-700 dark:text-gray-300">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
         <div className="toc ml-4 w-1/4 max-w-sm">
           <SideNav headings={article?.content} headingRefs={headingRefs} />
         </div>

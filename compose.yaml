@@ -1,0 +1,26 @@
+# version: '3.8'
+
+services:
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    ports:
+      - "3000:3000"
+
+    develop:
+      watch:
+        - path: ./app/package.json
+          action: rebuild
+        - path: ./app
+          target: /app/src
+          action: sync
+          
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    env_file:
+      - .env
