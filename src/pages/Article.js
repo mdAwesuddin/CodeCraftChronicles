@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 // import articleContent from "./article-content";
-
+import { summarizeArticle } from "../hooks/summarize";
 //Componenets
 import Articles from "../components/Articles";
 import CommentsList from "../components/CommentsList";
@@ -21,6 +21,20 @@ const Article = () => {
   const article = articleContent?.find((article) => article.id == name);
   const headingRefs = useRef({});
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [summary, setSummary] = useState("Summarizing...");
+
+  useEffect(() => {
+    if (article?.content) {
+      const fullContent = article.content
+        .map((section) => `${section?.Title || ""}\n${section?.content || ""}`)
+        .join("\n\n");
+
+      (async () => {
+        const result = await summarizeArticle(fullContent);
+        setSummary(result);
+      })();
+    }
+  }, [article]);
 
   const {
     data: comments,
@@ -164,21 +178,57 @@ const Article = () => {
         
         {/* Summary Text */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <p className="text-gray-800 dark:text-gray-200">hello</p>
+          <p className="text-gray-800 dark:text-gray-200">{article?.title}</p>
         </div>
         
         {/* Key Points */}
-        <div className="p-4">
-          <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Key Points:</h3>
-          <ul className="space-y-3">
-            {keyPoints.map((point, index) => (
-              <li key={index} className="flex items-start">
-                <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 mr-2 flex-shrink-0"></div>
-                <span className="text-gray-700 dark:text-gray-300">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className={`p-4 overflow-y-auto h-[90%] ${
+    summary === "Summarizing..." || summary.startsWith("⚠️")
+      ? "flex items-center justify-center"
+      : ""
+  }`}>
+    {summary === "Summarizing..." ? (
+      // Loader while fetching
+      <div className="flex flex-col items-center justify-center text-gray-600 dark:text-gray-300">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-indigo-500 mb-3"></div>
+        <p>Generating summary...</p>
+      </div>
+    ) : summary.startsWith("⚠️") ? (
+      // Error state
+      <div className="flex flex-col items-center text-center text-red-500">
+        <p>⚠️ Something went wrong. Please try again in a Minute.</p>
+        <button
+          onClick={async () => {
+            setSummary("Summarizing...");
+            const fullContent = article.content
+              .map(
+                (section) => `${section?.Title || ""}\n${section?.content || ""}`
+              )
+              .join("\n\n");
+            const result = await summarizeArticle(fullContent);
+            setSummary(result);
+          }}
+          className="mt-3 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600"
+        >
+          Retry
+        </button>
+      </div>
+    ) : (
+      // Show summary points
+      <ul className="space-y-3">
+        {summary.split("\n").map((line, i) =>
+          line.trim() ? (
+            <li key={i} className="flex items-start">
+              <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 mr-2 flex-shrink-0"></div>
+              <span className="text-gray-700 dark:text-gray-300">
+                {line.replace(/^[-•\d.]/, "").trim()}
+              </span>
+            </li>
+          ) : null
+        )}
+      </ul>
+    )}
+  </div>
       </div>
 
         <div className="toc ml-4 w-1/4 max-w-sm">
