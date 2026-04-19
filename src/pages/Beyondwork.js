@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { BlogsState } from "../Context";
 
 const Beyondwork = () => {
@@ -9,19 +7,11 @@ const Beyondwork = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-    });
-  }, []);
-
-  useEffect(() => {
     if (images && images.length > 0) {
       const flattenedImages =
         images[0]?.image?.map((imgObj) => imgObj.image) || [];
 
-      console.log("IMAGES 👉", flattenedImages); // debug
+      console.log("IMAGES 👉", flattenedImages); 
       setImageList(flattenedImages);
     }
   }, [images]);
