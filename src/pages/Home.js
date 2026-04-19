@@ -61,7 +61,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pb-8 md:p-12 lg:px-16 lg:py-15">
+        {/* <div className="pb-8 md:p-12 lg:px-16 lg:py-15">
           <div className="mx-auto max-w-lg text-center">
             <h2 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white">
               Subscribe us
@@ -105,7 +105,7 @@ const Home = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
